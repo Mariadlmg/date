@@ -3,12 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=valentine.html">
     <title>Date idea c:</title>
+    <style>
+        body {
+            background-color: #ffc8fd;
+            font-family: 'Comic Sans MS', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px 14px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            width: min(560px, 100%);
+        }
+
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.5em;
+            margin: 0 0 20px;
+        }
+
+        .buttons {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2em;
+            position: relative;
+        }
+
+        #yesBtn {
+            background-color: #97cdff;
+            color: white;
+            z-index: 2;
+        }
+
+        #noBtn {
+            background-color: #ff6b6b;
+            color: white;
+            z-index: 1;
+        }
+
+        .gif {
+            margin: 20px 0;
+        }
+
+        .hero-gif {
+            width: min(220px, 70vw);
+            height: auto;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(90px, 1fr));
+            gap: 14px;
+            width: min(540px, 92vw);
+            margin: 24px auto 0;
+        }
+
+        .option-btn {
+            min-height: 116px;
+            margin: 0;
+            padding: 14px 10px;
+            border-radius: 18px;
+            background-color: #ffffff;
+            color: #ff6b6b;
+            box-shadow: 0 8px 18px rgba(255, 107, 107, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .option-icon {
+            font-size: 2.2em;
+            line-height: 1;
+        }
+
+        .option-label {
+            font-size: 0.95em;
+            line-height: 1.15;
+        }
+
+        .final-message {
+            color: #ff6b6b;
+        }
+
+        .final-message p {
+            color: #333;
+            font-size: 1.25em;
+            line-height: 1.45;
+            margin: 12px auto;
+            max-width: 520px;
+        }
+
+        @media (max-width: 420px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .buttons {
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            button {
+                margin: 0;
+            }
+
+            .option-grid {
+                grid-template-columns: repeat(2, minmax(120px, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>nos vemos el jueves?</h1>
+        <div class="gif">
+            <img class="hero-gif" src="./media/cute.gif" alt="Cute gif">
+        </div>
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No &gt;:(</button>
+        </div>
+    </div>
+
     <script>
-        window.location.replace('valentine.html');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.container');
+        let yesBtnSize = 1;
+        let noBtnSize = 1;
+
+        noBtn.addEventListener('click', () => {
+            yesBtnSize *= 1.25;
+            yesBtn.style.transform = `scale(${yesBtnSize})`;
+            noBtnSize -= 0.1;
+            noBtn.style.transform = `scale(${noBtnSize})`;
+        });
+
+        function showFinalMessage() {
+            container.innerHTML = `
+                <div class="final-message">
+                    <h1>Nos vemos el jueves!</h1>
+                    <p>pd: la seleccion no es guardada porque hice esta web en 15min, asi que dime que escogiste xd</p>
+                    <p>lindo diaa &lt;3</p>
+                </div>
+            `;
+        }
+
+        yesBtn.addEventListener('click', () => {
+            container.innerHTML = `
+                <h1>Que plan escoges?</h1>
+                <div class="option-grid">
+                    <button class="option-btn" type="button">
+                        <span class="option-icon">&#128564;</span>
+                        <span class="option-label">Vamos a dormir</span>
+                    </button>
+                    <button class="option-btn" type="button">
+                        <span class="option-icon">&#9749;</span>
+                        <span class="option-label">cafecito</span>
+                    </button>
+                    <button class="option-btn" type="button">
+                        <span class="option-icon">&#127829;</span>
+                        <span class="option-label">Pizza</span>
+                    </button>
+                    <button class="option-btn" type="button">
+                        <span class="option-icon">&#128105;&#8205;&#127859;</span>
+                        <span class="option-label">Tu me cocinas wii</span>
+                    </button>
+                    <button class="option-btn" type="button">
+                        <span class="option-icon">&#127916;</span>
+                        <span class="option-label">Movies</span>
+                    </button>
+                    <button class="option-btn" type="button">
+                        <span class="option-icon">&#129781;&#127996;</span>
+                        <span class="option-label">Tu escoges</span>
+                    </button>
+                </div>
+            `;
+
+            document.querySelectorAll('.option-btn').forEach((button) => {
+                button.addEventListener('click', showFinalMessage);
+            });
+        });
     </script>
 </body>
 </html>
